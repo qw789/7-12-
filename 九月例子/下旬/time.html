@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>测试watch变化</title>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/element-ui@1.4.5/lib/theme-default/index.css">
+    <script src="https://unpkg.com/vue@2.4.4/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui@1.4.5/lib/index.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{items}}
+        <el-button type="default" @click="add">增加</el-button>
+        <el-button type="default" @click="change">增加</el-button>
+        <div v-for="(i,index) in array">
+            <div>
+                ccc
+            </div>
+        </div>
+        <input type="" name="" v-bind:value="something" v-on:input="something = $event.target.value">
+        {{something}}
+    </div>
+    <script type="text/javascript">
+    new Vue({
+        el: '#app',
+        data: {
+            items: [],
+            a: 3,
+            something:4
+        },
+        watch: {
+            items: {
+                handler: function(val, oldVal) { console.log(val==oldVal)},
+                deep: true
+            },
+            a: function(val, oldVal) {
+                console.log(val, oldVal)
+            }
+        },
+        methods: {
+            add() {
+                this.items.push({
+                    value: 2
+                })
+            },
+            change() {
+                this.a++;
+            }
+        }
+    })
+    </script>
+</body>
+
+</html>

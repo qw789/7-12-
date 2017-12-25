@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>拖拽</title>
+	<style type="text/css">
+		.box{
+			width: 100px;
+			height: 100px;
+			background: #333;
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+	</style>
+<!-- 	<aaa>
+	alert(1);
+	</aaa> -->
+	<script type="text/javascript">
+
+		function Mouse(){
+			this.oBox = document.getElementsByTagName('div')[0];
+			this.disX = 0;
+			this.disY = 0;
+			this.init();
+		}
+
+		Mouse.prototype.init = function(){
+			// let _this = this;
+			this.oBox.onmousedown = function(ev){
+				console.log(this)
+				this.fnDown(ev);
+				return false;
+			}
+		}
+//bind绑定和换用this是一个效果，就是把地方给看好
+		Mouse.prototype.fnDown = function(ev){
+
+			let oEvent = ev || event;
+			this.disX = oEvent.clientX - this.oBox.offsetLeft;
+			this.disY = oEvent.clientX - this.oBox.offsetLeft;
+			this.oNewBox = this.oBox.cloneNode(true);
+			this.oBox.parentNode.appendChild(this.oNewBox);
+			this.oNewBox.style.opacity = 0.3;
+			this.oNewBox.style.filter = 'alpha(opacity:30)';
+			this.oBox.setCapture && this.oBox.setCapture();
+			document.onmousemove = function(ev){
+				this.fnMove(ev);
+			}.bind(this);
+			document.onmouseup = function(){
+				this.fnUp();
+			}.bind(this);
+		}
+
+		Mouse.prototype.fnMove = function(ev){
+			let oEvent = ev || event;
+			let l = oEvent.clientX - this.disX;
+			let t = oEvent.clientY - this.disY;
+			let maxW = document.documentElement.clientWidth - this.oBox.offsetWidth;
+			let maxH = document.documentElement.clientHeight - this.oBox.offsetHeight;
+
+			// //限制范围
+			if (l<0) {l=0};
+			if (t<0) {t=0};
+			if (l>maxW) {l=maxW};
+			if (t>maxH) {t=maxH};
+
+			this.oNewBox.style.left = l +'px';
+			this.oNewBox.style.top = t + 'px';	
+			
+		}
+
+		Mouse.prototype.fnUp = function(){
+			
+			document.onmousemove = null;
+			document.onmouseup = null;
+			//释放捕获
+			this.oNewBox.releaseCapture && this.oNewBox.releaseCapture();
+			console.log(this.oNewBox.offsetLeft);
+
+			this.oBox.style.left = this.oNewBox.offsetLeft +'px'
+			this.oBox.style.top = this.oNewBox.offsetTop +'px'
+			this.oBox.parentNode.removeChild(this.oNewBox);	
+		
+		}
+
+		window.onload = function(){
+			new Mouse();
+		}
+	</script>
+</head>
+<body>
+1111111111111111
+  <div class="box"></div>
+</body>
+</html>

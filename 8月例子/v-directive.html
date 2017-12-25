@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://unpkg.com/vue@2.3.3/dist/vue.js"></script>
+	<style type="text/css">
+		#hook-arguments-example{
+			width: 300px;
+			height: 200px;
+		}
+	</style>
+</head>
+</head>
+<body>
+      <a href=""></a>
+	<input type="" name="" id="app" v-focus>
+ 	<div id="hook-arguments-example" v-demo:foo.a.b="message" v-color-swatch="color"></div>
+	<script type="text/javascript">
+		Vue.directive('demo', {
+		  bind: function (el, binding, vnode) {
+		    var s = JSON.stringify;
+		    el.innerHTML =
+		      'name: '       + s(binding.name) + '<br>' +
+		      'value: '      + s(binding.value) + '<br>' +
+		      'expression: ' + s(binding.expression) + '<br>' +
+		      'argument: '   + s(binding.arg) + '<br>' +
+		      'modifiers: '  + s(binding.modifiers) + '<br>' +
+		      'vnode keys: ' + Object.keys(vnode).join(', ')
+		  }
+		})
+		Vue.directive('color-swatch', function (el, binding) {
+		  el.style.backgroundColor = binding.value
+		})
+		Vue.directive('focus', {
+		  // 当绑定元素插入到 DOM 中。
+		  inserted: function (el) {
+		    // 聚焦元素
+		    el.focus()
+		  }
+		})
+		new Vue({
+		  el: '#hook-arguments-example',
+		  data: {
+		    message: 'hello!',
+		    color:"red"
+		  }
+		});
+		new Vue({
+		  el: '#app'
+		})
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var obj={a:3};
+		 Object.defineProperty(obj, "a", {
+		        enumerable: true,
+		        configurable: true,
+		        get: function () {
+		            console.log('你访问了' + "a");
+		        },
+		        set: function (newVal) {
+		            console.log('你设置了' + "a");
+		            return obj;
+		        }
+		    })
+		 obj.a=6;
+		 console.log(obj)
+	</script>
+</body>
+</html>

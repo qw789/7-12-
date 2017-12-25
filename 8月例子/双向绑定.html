@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>jQuery</title>
+<style>
+</style>
+</head>
+<body>
+测试1:
+<div id="demo">
+	<input type="text" value="php best" autocomplete="off" />
+	<p></p>
+</div>
+测试2:
+<div id="app">
+	<input>
+	<ul>
+		<li><span>jQuery</span> <button>X</button></li>
+	</ul>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+<script>
+$(function(){
+	$("#demo p").text($("input").attr("value"));
+	$("#demo input").on("input", function() { //IE8没有input事件,可以换成keyup
+		$("#demo p").empty().text(this.value); //this.value不能写为$(this).attr("value")
+	}).focus();
+	
+	//处理enter添加事件
+	$("#app input").on("keyup", function(e){
+		if(e.keyCode == 13 && $(this).val() != "") {
+			$("#app ul").append("<li>"+this.value+" <button>X</button></li>");
+			$(this).val("").focus();
+		}
+	}).focus();
+	//处理button删除事件(因为button是后期动态生成的,所以需要把选择器写在on里面)
+	$("#app").on("click", "button", function(){
+		$(this).parent().remove();
+	});
+});
+</script>
+</body>
+</html>

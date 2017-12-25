@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+	//运用bind绑定对像后必须有一个函数赋值过程！！！！！！
+		var fullname = 'John Doe'
+		var obj = {
+			fullname: 'Colin Ihrig',
+			getFullname: function() {
+			return this.fullname
+			}
+		}
+	 	var person = obj.getFullname
+	 	var person=person.bind(obj);
+		// console.log(obj.getFullname()) // Colin Ihrig
+		// console.log(person.call(obj))
+		console.log(person())
+		function removeWithoutCopy(arr, item) {
+	    var n=arr.length;
+	     for(var i=0;i<n;i++){
+	         if(arr[0]!==item)   
+	             arr.push(arr[0]);
+	         arr.shift();
+	           
+	    }
+	    return arr;
+	}
+removeWithoutCopy([1,2,3,4,5,6], 5)
+Object.keys(String(Array(101)));
+new Array(101).join('a').replace(/a/g, function(v, i){return i+',';}).split(',').splice(0, 100);
+Array.from({length:100}, (v,k) => k)
+	</script>
+</body>
+</html>

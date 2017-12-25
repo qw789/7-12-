@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://unpkg.com/vue@2.3.3/dist/vue.js"></script>
+</head>
+<div id="app">
+	{{message}}
+	<child-component v-show="someChildProperty">
+        <p slot="nav">我是导航</p>
+	</child-component>
+	<child-component2 v-show="someChildProperty">
+	 	<p>吃饭</p>
+	 	{{message}}
+	</child-component2>
+	<child-component v-show="someChildProperty">
+        <template scope="props">
+            <p>{{props.text}}</p>
+         </template>
+	</child-component>
+</div>
+<body>
+	<script type="text/javascript">
+	//学一种就行了
+		Vue.component('child-component', {
+		  template: '<span>{{ message }}<slot name="nav"></slot></span>',
+		  data : function(){
+		    return {
+		    	message: 'hello'
+		    }
+		  }
+		})
+		Vue.component('child-component2', {
+		  template: '<div><span>{{ message }}</span><slot></slot></div>',
+		  data : function(){
+		    return {
+		    	message: 'world'
+		    }
+		  }
+		})
+		Vue.component('child-component3', {
+		  template: '<div><span>{{ message }}</span><slot :text="three"></slot></div>',
+		  data : function(){
+		    return {
+		    	message: 'world'
+		    }
+		  }
+		})
+		var vm=new Vue({
+		  el: '#app',
+		  data: {
+		    someChildProperty:true,
+		    message:"ccccc"
+		  }
+		})
+		//如何让child-compnent里的message渲染？想给组件里面塞入一
+	</script>
+</body>
+</html>

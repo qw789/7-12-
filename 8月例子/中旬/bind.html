@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style type="text/css">
+	#box{
+    width: 400px;
+    min-height: 100px;
+    max-height: 300px;
+    height: auto;
+    outline: none;
+    border: 1px solid #f00;
+    overflow-y: auto;
+  }
+</style>
+<body>
+<!-- div实现textarea -->
+	<div id="box" contenteditable="true">
+		
+	</div>
+	<script type="text/javascript">		
+		function Man(age){
+			this.sex="male";
+			this.age=age;
+		}
+	m1=Man(2);
+	m2=new Man(21);
+	console.log(m1)
+	console.log(m2)
+	function Man(age) {
+	var obj = new Object();
+	obj.sex = "mail";
+	obj.age = age;
+	return obj;
+}
+m3=Man(22);
+console.log(m3)
+	</script>
+</body>
+</html>

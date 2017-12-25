@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+ <body>
+    <style style="display:block" contentEditable>
+      body { color: blue }
+    </style>
+    <div id="aa">
+    	
+    </div>
+    <script type="text/javascript">
+    //undefined在全局中只读。在局部作用域由于不是保留字又可以被赋值！！！
+    	(function() {
+		var undefined = 'foo';
+		console.log(undefined, typeof undefined)
+		})()
+		var undefined = 'foo';
+		console.log(undefined, typeof undefined)
+    </script>
+ </body>
+</html>

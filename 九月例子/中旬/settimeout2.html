@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script>
+var x = 0
+function countSecond()
+{
+   x ++;
+   if(x>5){
+   	return false;
+   }
+　 document.haorooms.haoroomsinput.value=x
+　 setTimeout(countSecond, 500)
+}
+</script>
+</head>
+<html>
+<body>
+
+<form name="haorooms">
+   <input type="text" name="haoroomsinput"value="0" size=4 >
+</form>
+
+<script>
+//1.为什么双引号2.为什么函数直接执行
+countSecond()
+</script>
+
+</body> 
+</html>

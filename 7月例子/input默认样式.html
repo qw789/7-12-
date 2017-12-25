@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+    input[type="checkbox"] + label {
+    cursor: pointer;
+    font-size: 1em;
+	}
+	[id^="checkbox-"] + label {
+	    background-color: rgba(0,0,0,0);
+	    border: 1px solid #0e446e;
+	    padding: 9px;
+	    display: inline-block;
+	    vertical-align: middle;
+	    border-radius: 3px;
+	}
+	[id="checkbox-1"]:checked + label {
+	    background-color: #0e446e;
+	    border: 1px solid #0e446e;
+
+	}
+	</style>
+</head>
+<body>
+	  <input type="checkbox" value="0" class="check_view_state" id="checkbox-1" style="display: none;">
+      <label for="checkbox-1"></label>
+      <select>
+      	<option>dd</option>
+      	<option>dd</option>
+      	<option>dd</option>
+      </select>
+</body>
+</html>

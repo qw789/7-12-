@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function format(str){
+		    var hourMap=[{'s':'尖峰'},{'p':'高峰'},{'v':'低谷'},{'f':'平段'}]
+		    var arr = str.split('');
+		    var arr2=[];
+		    for(var i=0;i<arr.length;i++){
+		       hourMap.forEach(function(index){
+		                if(index[arr[i]]!=undefined){
+		                    arr2.push(index[arr[i]])
+		                }
+		        })
+		    }
+		    var hours = [];
+		    var lastspvf = '';
+		    for (var i = 0; i < arr2.length; i++) {
+		        if (arr2[i] != lastspvf) {
+		            if (hours.length>0) {
+		                hours.slice(-1)[0].end = i;
+		            }
+		            hours.push({spvf:arr2[i], start:i})
+		        }
+		        lastspvf = arr2[i];
+
+		        if (i==arr2.length-1) {
+		            hours.slice(-1)[0].end = i+1;
+		        }
+		        
+		    }
+		    hours.map(function(index){
+		        index.start=[index.start+"-"+index.end];
+		        delete index.end
+		    })
+		var html='<table class="tabled">'+
+		          '<tr>'+
+		              '<th style="width: 300px;">时段</th>'+
+		              '<th style="width: 300px;">类型</th>'+
+		          '</tr>';
+		hours.forEach(function(index){
+		    var time=index.start;
+		    var type=index.spvf;
+		    html+=getHtml(time,type);
+		})
+		var tablefoot="</table>";
+		html+=tablefoot;
+		    return html;
+		}
+	</script>
+</body>
+</html>

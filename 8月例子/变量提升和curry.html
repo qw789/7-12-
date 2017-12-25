@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function add(a, b){
+		 var init =  b
+		  ? a+b 
+		  : function (b){
+		   return a+b
+		  }
+		  return init
+		}
+		add(10)(1);
+		add(10,1)
+		// console.log(text)
+		// var text = 0;
+		// function text() {}
+		// console.log(text)
+		//编译成这样,变量提升只提升变量，不提升值。函数变量优先级高。如果不提升有值的会覆盖函数。
+
+		// function text() {}
+
+		// var text;
+
+		// console.log(text)
+
+		// text = 0;
+
+		// console.log(text);
+		//------------------------------------------------------------
+		// console.log(text)
+		// function text() {}
+
+		// var text=3;
+
+		// console.log(text)
+
+		// text = 0;
+
+		// console.log(text);
+		// function test(){ 
+		// (function (){ 
+		// for(var i=0;i<4;i++){ 
+		// } 
+		// })(); 
+		// alert(i); 
+		// } 
+		// test();
+		
+		var tmp = new Date();
+
+		function f() {
+		  console.log(tmp);
+		  if (false) {
+		    var tmp = 'hello world';
+		  }
+		}
+
+		f(); 
+	</script>
+</body>
+</html>

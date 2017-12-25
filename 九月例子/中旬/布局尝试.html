@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		html,body{
+			width: 100%;
+			overflow: hidden;
+		}
+		.cle:after {
+		  content: ".";
+		  display: block;
+		  height: 0;
+		  clear: both;
+		  visibility: hidden;
+		}
+		#left{
+			float: left;
+			width: 200px;
+			height: 300px;
+			background: pink;
+		}
+		#main{
+			float: left;
+			width: calc(100vw - 500px);
+			height: 300px;
+			background: blue;
+		}
+		#right{
+			float: left;
+			width: 300px;
+			height: 300px;
+			background: green;
+		}
+		.test{
+			width: 300px;
+			height: 300px;
+			background: yellow;
+			padding: 0 100px;
+		}
+		/*background可以在padding上面*/
+	</style>
+</head>
+<body>
+	<div class="container cle">
+		<div id="left"></div>
+		<div id="main"></div>
+		<div id="right"></div>
+	</div>
+	<div class="test">
+		dddddddd
+	</div>
+	<script type="text/javascript">
+		//经典面试题
+		function Foo() {
+		    getName = function () { alert (1); };
+		    return this;
+		}
+		// Foo.getName = function () { alert (2);};
+		// Foo.prototype.getName = function () { alert (3);};
+		// var getName = function () { alert (4);};
+		// function getName() { alert (5);}
+
+		// Foo.getName();//2
+		// getName();//4
+		Foo().getName();//1
+		// getName();//1
+		// new Foo.getName();//2
+		// new Foo().getName();//3
+		// new new Foo().getName();//3
+	</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>缓冲运动2</title>
+        <style type="text/css">
+        body{
+            margin: 0;
+            height: 1000px;
+        }
+       /* #test{
+            height: 2000px;
+        }*/
+            .div {
+                width: 100px;
+                height: 100px;
+                background-color: darkslateblue;
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                cursor: pointer;
+            }
+        </style>
+        <div id="test">
+            
+        </div>
+        <script type="text/javascript">
+        // body的margin为0很重要，浏览器默认body的margin为8px;
+        window.onscroll= function(){
+            //1,给浏览器的滚动添加事件，onscollTop事件
+            var oDiv = document.getElementById('div');
+            var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
+//            oDiv.style.top = document.documentElement.clientHeight-oDiv.offsetHeight+scrollTop+'px';
+            //可视区域的高度减掉物体高度再加上向上滚动的高度
+            console.log(document.documentElement.clientHeight,document.body.clientHeight,document.body.offsetHeight,document.documentElement.offsetHeight,scrollTop)
+            console.log(document.documentElement.clientHeight-oDiv.offsetHeight+scrollTop)
+            starMove(document.documentElement.clientHeight-oDiv.offsetHeight+scrollTop)
+        };
+        var timer = null;
+        function starMove(iTarget){
+            var oDiv = document.getElementById('div');
+            clearInterval(timer);
+            timer = setInterval(function(){
+                var speed = (iTarget-oDiv.offsetTop)/4;
+                speed=speed>0?Math.ceil(speed):Math.floor(speed);
+                if(oDiv.offsetTop==iTarget){
+                    clearInterval(timer)
+                }else{
+                    console.log(oDiv.style.top)                    
+                    oDiv.style.top = oDiv.offsetTop+speed+'px';
+                }
+            },300)
+        }
+        //offsetTop不能对其赋值，只能读。
+        console.log(Math.ceil(-2.4))
+        </script>
+    </head>
+
+    <body>
+        <div class="div" id="div"></div>
+    
+    </body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/element-ui@1.4.5/lib/theme-default/index.css">
+    <script src="https://unpkg.com/vue@2.4.4/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui@1.4.5/lib/index.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <template>
+            <div class="block1">
+                <span class="demonstration">尖峰</span>
+                <el-slider v-model="value1" @change="ge(value1)"></el-slider>
+            </div>
+            <div class="block2">
+                <span class="demonstration">高峰</span>
+                <el-slider v-model="value2"></el-slider>
+            </div>
+            <div class="block3">
+                <span class="demonstration">平段</span>
+                <el-slider v-model="value3"></el-slider>
+            </div>
+            <div class="block4">
+                <span class="demonstration">低谷</span>
+                <el-slider v-model="value4" :format-tooltip="formatTooltip"></el-slider>
+            </div>           
+        </template>
+    </div>
+    <script type="text/javascript">
+       new Vue({
+         el: '#app',
+         data:{
+            value1: 0,
+            value2: 10,
+            value3: 0,
+            value4: 0
+        },
+         methods: {
+                formatTooltip(val) {
+                    return val / 10;
+                },
+                ge(value){
+                    console.log(value);
+                    return value;
+                }
+        }
+       })
+    </script>
+</body>
+
+</html>

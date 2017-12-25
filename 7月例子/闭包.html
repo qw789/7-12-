@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var myobject=(function(){
+			var value=0;
+			return {
+				increment:function(inc){
+					value+= typeof inc === "number"?inc:1;
+				},
+				getValue:function(){
+					return value;
+				}
+			}
+		})()
+		myobject.increment(2);
+		console.log(myobject.getValue())
+		var quo=function(status){
+			return {
+				get_status:function(){
+					return status;
+				}
+			}
+		}
+
+		//注意get_status是全局变量
+		var myQuo=quo("amazed");
+		document.writeln(myQuo.get_status());
+	</script>
+</body>
+</html>

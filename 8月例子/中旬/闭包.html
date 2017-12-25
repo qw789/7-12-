@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// 手动循环
+	// var a = [];
+	// let i = 0;
+	// a[i] = function() {
+	//     return i;
+	// }
+	// i++; // i = 1;
+
+	// a[i] = function() {                                                     // a[i] 等同于 a[0] 
+	//     return i;                                                           // i 会在函数使用时再查询  而不是等于 1  
+	// }
+	// i++; // i = 2;
+
+	// a[i] = function() {
+	//     return i;
+	// }
+	// i++; // i = 3;
+
+	// console.log(i);      // 3
+	// console.log(a[0]()); // 3
+	// console.log(a[2]()); // 3
+  // for(let j=0;j<10;j++){
+  // 	console.log(j)
+  // }
+
+    var a = [];
+	for (var i = 0; i < 10; i++) {
+	    a[i] = function() {
+	      return i;
+	    }
+	}
+	console.log(a[6]())
+	function createFunction(){
+		var result=[];
+			for (var i = 0; i < 10; i++) {
+		    result[i] = function() {
+		      return i;
+		    }
+		}
+		return result;
+	}
+	console.log(createFunction()[1]())
+	</script>
+</body>
+</html>

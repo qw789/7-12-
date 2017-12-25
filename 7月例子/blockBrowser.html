@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var total="";
+		for(var i=0;i<100;i++){
+			total=total+i
+			// 一个状态参数，一个标题，一个可选的url参数
+			history.pushState(0,0,total)
+			
+		}
+		console.log(total)
+	</script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>vue test</title>
+<meta charset='utf-8'>
+<style type="text/css">
+a{
+	text-decoration: none;
+}
+.newheader{
+	overflow: hidden;
+}
+.search-box{
+	width: 500px;
+	position: relative;
+}	
+.search-box input{
+	width: 100%;
+	padding: 10px 20px;
+	box-sizing: border-box;
+	border-radius: 20px;
+}
+.search-box .href-box{
+	position: absolute;
+	left: 20px;
+	top: 10px;
+}
+.search-box a{
+	padding: 5px 10px;
+	background-color: #f3f5f7;
+	margin-right: 5px;
+}
+.del{
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	background-color: #000;
+	color: #fff;
+	text-align: center;
+	line-height: 20px;
+	border-radius: 20px;
+	right: 20px;
+	top: 10px;
+}
+.cancle{
+	color: #333;
+    margin-left: 20px;
+    margin-top: 7px;
+}
+.history{
+	width: 500px;
+	height: 200px;
+	background: #f3f5f7;
+	color: #333;
+	margin-top: 40px;
+}
+.l{
+	float: left;
+}
+</style>
+</head>
+<body>
+<header>
+<div class="newheader" id="newheader" v-on:click="searchClick">
+	<div class="search-box l">
+		<input type="text" ref="input1" id="search" v-model="msg" v-on:click.stop='InputFocus'/>
+		<div class="href-box">
+			<a v-for='item in keywords' v-bind:href='item.id'>{{item.name}}</a>
+		</div>
+		<span class="del" v-if='isShowDel' v-on:click.stop='delInput'>×</span>
+	</div>
+	<a href="javascript:void(0);" class="l cancle" v-on:click="cancle">取消</a>
+	<div class="history" v-if='isHistory'>
+		历史记录 热门搜索等信息
+	</div>
+</div>
+</header>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+var app = new Vue({
+  el: '#newheader',
+  data: {
+    keywords: [{id:1,name:'111'},{id:2,name:'2222'}],
+    isShowDel: false, //是否显示删除按钮
+    isFocus: false, //是否正在输入
+    isHistory: false, //是否显示登录历史等信息
+    msg:""
+  },
+   methods: {
+    InputFocus: function () {
+    	if(this.keywords.length > 0){
+    		this.keywords = [];
+    	}
+      	this.isShowDel = true;
+      	this.isFocus = true;
+      	this.isHistory = true;
+    },
+    searchClick: function(){
+		if(this.msg == ''){
+    		this.keywords = [{id:1,name:'111'},{id:2,name:'2222'}];
+    	}
+    	this.isFocus = false;
+    	this.isShowDel = false;
+    },
+    delInput: function(){
+    	this.msg = "";
+    	document.getElementById("search").focus();
+    	console.log("del");
+    },
+    cancle: function(){
+    	this.msg = "";
+    	this.keywords = [{id:1,name:'111'},{id:2,name:'2222'}];
+    	this.isHistory = false;
+    }
+  }
+})
+</script>
+</body>
+</html>

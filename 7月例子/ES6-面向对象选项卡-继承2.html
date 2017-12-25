@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>http://www.zhinengshe.com/</title>
+    <style>
+        .box div {
+            width: 200px;
+            height: 200px;
+            display: none;
+            line-height: 200px;
+            font-size: 50px;
+            text-align: center;
+            background: #ccc;
+            color: #fff;
+        }
+        .box div.on {
+            display: block;
+        }
+        .box input.active {
+            background: #f60;
+            color: #fff;
+        }
+    </style>
+    <script>
+        // 定义选项卡类
+        class Tab {
+            // 构造函数写属性
+            constructor(id) {
+                this.oBox = document.getElementById(id);
+                this.aBtn = this.oBox.getElementsByTagName('input');
+                this.aDiv = this.oBox.getElementsByTagName('div');
+                this.init();
+            }
+            /** 方法 **/
+            init() {
+                for (let i = 0; i < this.aBtn.length; i++) {
+                    this.aBtn[i].onclick = function(){
+                        this.hide(); // 清空
+                        this.show(i); // 显示
+                    }.bind(this);
+                }
+            }
+            hide() {
+                for (let i = 0; i < this.aBtn.length; i++) {
+                    this.aBtn[i].className = '';
+                    this.aDiv[i].className = '';
+                }
+            }
+            show(index) {
+                this.aBtn[index].className = 'active';
+                this.aDiv[index].className = 'on';
+            }
+        }
+
+        // 定义自动播放的类
+        class AutoTab extends Tab {
+            constructor(id) {
+                super(id);
+                this.iNow = 0; // 默认显示第几个选项卡
+                this.timer = null;
+                this.timer = setInterval(function() {
+                    this.next();
+                }.bind(this),500);
+                this.oBox.onmouseenter = function() {
+                    clearInterval(this.timer);
+                }.bind(this);
+                this.oBox.onmouseleave = function() {
+                    this.timer = setInterval(function() {
+                        this.next();
+                    }.bind(this),500);
+                }.bind(this);
+            };
+            next() {
+                this.iNow++;
+                if (this.iNow == this.aBtn.length) {
+                    this.iNow = 0;
+                }
+                this.hide();
+                this.show(this.iNow);
+            }
+        }
+        window.onload = () => {
+            new Tab('box');
+            new AutoTab('box2');
+        };
+    </script>
+</head>
+<body>
+<div id="box" class="box">
+    <input class="active" type="button" value="体育">
+    <input type="button" value="新闻">
+    <input type="button" value="热点">
+    <div class="on">体育</div>
+    <div>新闻</div>
+    <div>热点</div>
+</div>
+<div id="box2" class="box">
+    <input class="active" type="button" value="体育">
+    <input type="button" value="新闻">
+    <input type="button" value="热点">
+    <div class="on">体育</div>
+    <div>新闻</div>
+    <div>热点</div>
+</div>
+</body>
+</html>

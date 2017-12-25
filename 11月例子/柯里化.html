@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// var f = (i=>{
+		// 	var a = []
+		// 	return b=>a.push(i)
+		// })()
+  //   f(1)
+  //   console.log(f(1));
+  // var a=0;
+  var a;
+  function f(a){
+  	var a=1;
+  	// return function c(){
+  	// 	return a;
+  	// }
+    return a;
+  	//return c=>a;
+  }
+  console.log(f(a));
+  // function ff(a){
+  //   console.log(f(a))
+  // 	// console.log(f(a)(a));
+  // }
+  // ff(a);
+  // var b=1;
+  // window.b=2;
+  // b=3;
+  // console.log(b)
+  var a=1;
+  function test(a){
+    a=2;
+    console.log(a)
+  }
+  test(a);
+  //test执行找实参a,找到a=1;1进入函数执行。但是a=2这一句会造成1=2,2把1覆盖。console.log(2).
+  //如果没有a=1这一句，就会开始找不到实参a,函数执行报错。
+	</script>
+</body>
+</html>

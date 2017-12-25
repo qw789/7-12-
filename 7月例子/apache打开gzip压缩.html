@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	    apache开启gzip压缩提高数据传输速度
+	修改 /etc/httpd/conf/httpd.conf
+
+	开放以下modules
+	-------------------------------------------------------------
+	LoadModule deflate_module modules/mod_deflate.so
+	LoadModule headers_module modules/mod_headers.so
+	LoadModule filter_module modules/mod_filter.so
+	-------------------------------------------------------------
+
+	在文件末尾的 "Include conf/NameVirtualHost.conf" 之前增加以下内容
+	-------------------------------------------------------------
+	<IfModule mod_deflate.c>
+	   # Insert filter
+	   SetOutputFilter DEFLATE
+
+	   AddOutputFilterByType DEFLATE text/html text/plain text/xml
+	</IfModule>
+	-------------------------------------------------------------
+</body>
+</html>

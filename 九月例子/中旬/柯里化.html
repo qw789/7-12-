@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		sum(1) //1
+		sum(1)(2) //3
+		// function sum(item){
+		// 	var cur=item;
+		// 	var inner=function(next){
+		// 		return next==null?cur:(cur+=next,inner)
+		// 	};
+		// 	return item==null?undefined:inner;
+		// }
+		console.log(sum(1)(2))
+		function sum(item){
+			var cur=item;
+			var inner=function(next){
+				if(next!=null){
+					cur+=next;
+				}
+				return inner;
+			}
+			inner.toString=function(){
+				return cur;
+			}
+			return inner;
+		}
+
+		function Dog(name,breed,color,sex) {
+		   this.name=name;
+		   this.breed=breed;
+		   this.color=color;
+		   this.sex=sex;
+		}
+		Dog.prototype.toString = function dogToString() {
+		  var ret = "Dog " + this.name + " is a " + this.sex + " " + this.color + " " + this.breed;
+		  return ret;
+		}
+		var theDog = new Dog("Gabby","Lab","chocolate","female");
+		console.log(theDog.toString())
+	</script>
+</body>
+</html>

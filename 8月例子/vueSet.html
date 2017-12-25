@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://unpkg.com/vue@2.3.3/dist/vue.js"></script>
+</head>
+<div id="app">
+	{{a}}<br/><!-- {{c.b}} -->
+	<ul>
+		<li v-for="item of d">
+			{{item}}
+		</li>
+	</ul>
+</div>
+<body>
+	<script type="text/javascript">
+		var vm = new Vue({
+		  el:"#app",
+		  data:{
+			  c:{},
+			  a:2,
+			  d:[7,8,9]
+		  }
+		})
+// `vm.a` 是响应的
+// Vue.set(vm.c, 'b', 5)
+// vm.a=4;
+// vm.d[1]=1000;
+// Vue.set(this.d,1,1000)
+Vue.set(vm.d, 1, 1000)
+// vm.d.splice(1,1,1000)
+	</script>
+</body>
+</html>

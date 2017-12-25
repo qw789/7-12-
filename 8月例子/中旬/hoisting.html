@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+	// question
+		// console.log(text)
+		// var text = 0;
+		// function text() {}
+		// console.log(text)
+	//被编译成，函数优先级高，中间换顺序还是一样的结果。
+	// function text() {}
+
+		// var text;
+
+		// console.log(text)
+
+		// text = 0;
+
+		// console.log(text);
+	// -----------------------------------------------
+	//变量有值，值优先级最高
+		function text() {};
+
+		var text=3;
+
+		console.log(text)
+
+		text = 0;
+		console.log(text);
+	</script>
+</body>
+</html>

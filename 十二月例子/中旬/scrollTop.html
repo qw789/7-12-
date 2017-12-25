@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+</head>
+<body>
+	<div class="scroller" style="height: 500px; overflow-y: auto;">
+	    <div style="height: 3000px"></div>
+	</div>
+	<script type="text/javascript">
+		function scrollTopAnFun(){
+		          var running = false
+		          , gapNum // 时间切割份数变量
+		          
+		          return function selfFun(params){
+		                var { el, to, form, time} = params
+		                // ---------变量区------------
+		                const VDIRECTIONE = to < form  ? 'up' : 'bottom'
+		                , GAPVAL = to > form  ? to - form : (to == form ? 0 : form - to) // 相差值
+		                , TIMEGAP = 10 // 流畅度
+		                , GAPNAM = GAPVAL / TIMEGAP  //(time * TIMEGAP) / gapVal // 时间切割份数
+		                
+		                var nextScrollTopVal = 0 // 下一个滚动值
+
+		                // ----------纯函数区-------------
+		                /**
+		                 * 获取下一个滚动值
+		                 */
+		                let getnextScrollTop = ({ val ,nbak, n, elTop}) => {
+		                    return  VDIRECTIONE == 'up' 
+		                            ? elTop + (nbak - n) * val
+		                            : elTop - (nbak - n) * val
+		                }
+
+		                // ----------函数区---------------
+		                // 动画结束又执行新的任务
+		                function NewEvent(){
+		                    console.log('scroll正在使用')
+		                    // 暂停当前任务
+		                    gapNum = 0
+		                    // 执行新任务
+		                    window.setTimeout(()=>{
+		                        let p = Object(params, {
+		                            to: el.scrollTop
+		                        })
+		                        // 取消限制
+		                        running = false
+		                        selfFun(p)
+		                    }, TIMEGAP + 1)
+		                    
+		                }
+		                // 滚动动画结束
+		                let ScrollDefer = () => {
+		                    running = false
+		                    gapNum = false
+
+		                    // 因为精确度问题， 需要手动修复
+		                    if(form == 0){
+		                        el.scrollTop = 0
+		                    }
+		                }
+		                // scroll动画
+		                let SetScroll = () =>{
+		                    // 执行次数
+		                    gapNum --
+		                    if(gapNum <= 0){
+		                        ScrollDefer()
+		                        return
+		                    }
+
+		                    // 逻辑处理
+		                    let cors = ()=>{
+		                        if(gapNum === false){
+		                            return
+		                        }
+		                        
+		                        // 获取下一个top
+		                        nextScrollTopVal = getnextScrollTop({
+		                            val: TIMEGAP,
+		                            nbak: GAPNAM,
+		                            n: gapNum,
+		                            elTop: to,
+		                            VDIRECTIONE,
+		                        })
+		                        
+		                        // 防止闪屏
+		                        nextScrollTopVal && (el.scrollTop = nextScrollTopVal)
+
+		                        SetScroll()
+		                    }
+		                    // 执行下一个
+		                    window.setTimeout(cors, TIMEGAP)
+		                }
+
+		                // ------------ main -------------
+		                function main(){
+		                    // 动画结束又执行新的任务
+		                    if(running) {
+		                        NewEvent()
+		                        return
+		                    }
+
+		                    running = true
+		                    gapNum = GAPNAM 
+
+		                    // 设置scroll （递归函数）
+		                    SetScroll()
+
+		                }
+		                main()
+		          }
+		}
+		// debugger
+		let scrollTopAn = scrollTopAnFun()
+
+		scrollTopAn({
+		            el: $('.scroller')[0], // 滚动元素
+		            to: 30,  // 开始位置
+		            form: 500,  // 结束位置
+		            time: 1e4 * .5, // 所需时间
+		})
+	</script>
+</body>
+</html>

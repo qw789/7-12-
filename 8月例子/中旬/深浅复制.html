@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var obj = { a:1, arr: [2,3] };
+		var shallowObj = shallowCopy(obj);
+
+		function shallowCopy(src) {
+		  var dst = {};
+		  for (var prop in src) {
+		    if (src.hasOwnProperty(prop)) {
+		      dst[prop] = src[prop];
+		    }
+		  }
+		  return dst;
+		}
+
+    shallowObj.arr[1] = 5;
+
+    console.log(obj.arr[1])
+    let a = {
+	  name: 'LiHua',
+	  habits:  ['a', 'b']
+	}
+	// let b=a;
+	// b.name="cc";
+	var y = Object.assign({}, a);
+	y.name="dd";
+	console.log(a.name)
+	</script>
+</body>
+</html>

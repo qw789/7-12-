@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+	// arguments想用数组的方法的话 -> Array.prototype.slice.call(arguments)
+		function sortNumbers() {
+		  return Array.prototype.slice.call(arguments).sort();
+		}
+		console.log(sortNumbers(5,9,7));
+
+		const sortNumbers = (...numbers) => numbers.sort();
+		var arr=[13,3,7]
+		Math.min(...arr);
+		Math.min.apply(null, arr)
+	</script>
+</body>
+</html>

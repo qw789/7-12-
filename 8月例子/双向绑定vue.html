@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Vue</title>
+<style>
+</style>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+测试1:
+<div id="demo">
+	<input v-model="message">
+	<p>{{message}}</p>
+</div>
+测试2:
+<div id="app">
+	<input v-model="newTodo" v-on:keyup.enter="addTodo">
+	<ul>
+		<li v-for="(todo, index) in todos">
+			<span>{{todo.text}}</span>
+			<button v-on:click="removeTodo(index)">X</button>
+		</li>
+	</ul>
+</div>
+<script>
+var demo = new Vue({
+	el: '#demo',
+	data: {
+		message: 'php cdc'
+	}
+});
+var vm = new Vue({
+	el: '#app',
+	data: {
+		newTodo: '',
+		todos: [{text: 'Add some todos'}]
+	},
+	methods: {
+		addTodo: function() {
+			var text = this.newTodo.trim();
+			if(text) {
+				this.todos.push({text: text});
+				this.newTodo = '';
+			}
+		},
+		removeTodo: function(index) {
+			this.todos.splice(index, 1); //从下标index开始,删除1个元素
+		}
+	}
+});
+</script>
+</body>
+</html>

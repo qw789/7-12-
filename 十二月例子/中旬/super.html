@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		class Point {
+		  constructor(x, y) {
+		      this.x = x;
+		      this.y = y;
+		    }
+		  go() {
+		    return 1;
+		  }
+		}
+		class Child extends Point {
+
+		 constructor(x, y, color) {
+		 	 // console.log(this)
+		     super(x, y); // 调用父类的constructor(x, y)
+		     console.log(this)
+		     this.color = color;
+		   }
+		   go(){
+		   	return 2;
+		   }
+		}
+		//子类有constructor则必须有super
+		var point=new Point();
+		console.log(point.go());
+		var child=new Child();
+		console.log(child.go())
+
+		// class ColorPoint extends Point {
+		// }
+
+		// // 等同于
+		// class ColorPoint extends Point {
+		//   constructor(...args) {
+		//     super(...args);
+		//   }
+		// }
+		var a;
+		console.log(a)
+		
+	</script>
+</body>
+</html>

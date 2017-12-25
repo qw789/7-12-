@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<pre>
+		
+		1.自执行函数
+		2.jQuery = function( selector, context ) {
+			// The jQuery object is actually just the init constructor 'enhanced'
+			return new jQuery.fn.init( selector, context, rootjQuery );
+		}
+		jQuery.fn.init.prototype = jQuery.fn;
+		将jQuery.fn.init.fn指向jQuery.prototype，这样的话，当我们通过$.fn.newPrototypeAttr 方式向jQuery添加原型属性或方法，其实最终都成为了jQuery.fn.init地原型属性或方法
+		jq是一个函数(类)，一个有返回值的函数。返回值是一个函数的调用（实例）。
+		<b>成员函数（原型函数）有</b>
+		1.toArray
+		2.get
+		3.pushStack
+		4.each
+		5.ready
+		6.slice
+		7.first
+		8.last
+		9.eq
+		10.map
+		11.end
+		12.push
+		13.sort
+		14.splice
+		成员函数拓展（原型函数）line3795
+		1.data
+		2.removeData
+		line379开始扩展静态方法
+		扩展到line916
+		建一个hash表最简单的办法
+		jQuery.each("Boolean Number String Function Array Date RegExp Object Error".split(" "), function(i, name) {
+			class2type[ "[object " + name + "]" ] = name.toLowerCase();
+		});
+		extend 函数源码分析
+		三千行左右sizzle结束
+	</pre>
+	
+</body>
+</html>

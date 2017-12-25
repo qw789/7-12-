@@ -1,0 +1,46 @@
+<html>  
+    <head>  
+        <meta name="layout" content="main">  
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>  
+        <script type="text/javascript" src="http://html2canvas.hertzen.com/build/html2canvas.js"></script>  
+           
+      <script type="text/javascript">  
+    function printById(id) {  
+        html2canvas(document.getElementById(id), {  
+            allowTaint : true,  
+            taintTest : false,  
+            onrendered : function(canvas) {  
+                canvas.id = "mycanvas";  
+                //document.body.appendChild(canvas);  
+                //生成base64图片数据  
+                var dataUrl = canvas.toDataURL();  
+                var newImg = document.createElement("img");  
+                newImg.src = dataUrl;  
+                /* document.body.appendChild(newImg);  */  
+                /* window.open(newImg.src); */  
+                var printWindow = window.open(newImg.src);  
+                    // printWindow.document.write();   
+                     printWindow.document.write('<img src="'+newImg.src+'" />')  
+                     printWindow.print();  
+            }  
+        });  
+    }  
+</script>  
+</head>    
+    <body>    
+             
+        Hello!    
+        <div class="" style="background-color: #abc;" id='myPrint'>    
+            计算机天堂测试html5页面截图    
+            <br>jsjtt.com    
+        </div>    
+             
+        <textArea id="textArea" col="20" rows="10" ></textArea>    
+        dddddd    
+        <a href="javascript:void(0)" onclick="printById('myPrint')">打印</a>   
+        生成界面如下：    
+        xxxxxxxxxxxxxxxxxx
+        xxxxxxxxxxxxxxxxxxxxxxxxx
+    </body>    
+</html>    

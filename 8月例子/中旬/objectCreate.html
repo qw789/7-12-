@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var obj = {};
+		var obj2 = Object.create(obj);
+		console.log(obj2.__proto__ === obj);
+		function Foo(name) {
+		    this.name = name;
+		}
+
+		Foo.prototype.myName = function() {
+		    return this.name;
+		};
+
+		function Bar(name,label) {
+		    Foo.call( this, name );   //
+		    this.label = label;
+		}
+
+		// temp对象的原型是Foo.prototype
+		var temp = Object.create( Foo.prototype );  
+		//这两种方法是一样的
+        // Bar.prototype=new Foo();
+		// 通过new Bar() 创建的对象，其原型是temp, 而temp的原型是Foo.prototype，
+		// 从而两个原型对象Bar.prototype和Foo.prototype 有了"继承"关系
+		Bar.prototype = temp;
+
+		Bar.prototype.myLabel = function() {
+		    return this.label;
+		};
+
+		var a = new Bar( "a", "obj a" );
+
+		a.myName(); // "a"
+		a.myLabel(); // "obj a"
+		console.log(a.__proto__===Bar.prototype)
+		console.log(a.__proto__.__proto__ === Foo.prototype);  //true
+	</script>
+</body>
+</html>

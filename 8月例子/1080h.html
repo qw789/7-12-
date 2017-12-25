@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		body{
+			height: 2050px;
+			background:#ccc;
+			/*margin:20px;*/
+			margin: 0;
+			/*padding: 20px;*/
+		}
+		#test{
+			width: 300px;
+			height: 300px;
+			padding:30px;
+			background: red;
+			border:5px solid #000;
+			margin: 50px;
+			/*box-sizing:border-box;
+			-moz-box-sizing:border-box;  
+			-webkit-box-sizing:border-box; */
+		}
+	</style>
+</head>
+<body>
+     <div id="test">
+     	
+     </div>
+	<script type="text/javascript">
+	//clientHeight会随着设置而变化，innerHeight是可用高度
+	//ele.clientHeight不加border
+	//ele.offsetHeight加border
+		document.write(document.body.clientHeight+"<br>");
+		document.write(document.documentElement.clientHeight+"<br>");
+		document.write(window.innerHeight+"<br>");
+		document.write(window.outerHeight+"<br>");
+		document.write(document.body.offsetHeight+"<br>");
+		document.write(document.body.scrollHeight+"<br>" );
+		var test=document.querySelector("#test");
+		var cl=test.clientHeight;
+		var cl2=test.offsetHeight;
+		document.write(cl,','+cl2)
+	</script>
+</body>
+</html>

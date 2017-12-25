@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <a href="https://github.com/qw789/showproject"></a>
+    <script type="text/javascript">
+    (function(){
+    	function console3(){
+    		console.log(3333)
+    	}
+    	//不多想了，这里就是为了私有化a,b.
+    	//这里console1,2,4是公共接口。
+    	window.qw=(function(){
+    		var a=3;
+    		function b(){
+    			a++;
+    		}
+    		var _init={
+    			console1:function(){
+    				// console.log(this)
+    				return a;
+    			},
+    			console2:function(){
+    				console.log(222)
+    			},
+    			console4:function test(){
+
+    			}
+    		};
+    		return _init;
+    	})()
+    })();
+    console.log(qw.console1());
+    console.log(console3())
+            		
+    // 	　　var qw = {
+    // 	　　　　name : "My Object",
+    // 	        console1 : function(){
+    // 	　　　　　　return name;
+    // 	　　　　}
+    // 	　　};
+                    
+                       
+
+    // console.log(qw.console1());
+    		var name = "The Window";
+    	　　var object = {
+    	　　　　name : "My Object",
+    	　　　　getNameFunc : function(){
+    	　　　　　　return this.name
+    	　　　　}
+    	　　};
+    	console.log(object.getNameFunc())
+    // 　　console.log(object.getNameFunc()());
+
+    // 	  var name = "The Window";
+    // 	　　var object = {
+    // 	　　　　name : "My Object",
+    // 	　　　　getNameFunc : function(){
+    // 	// 　　　　　　var that = this;
+    // 	　　　　　　return function(){
+    // 	　　　　　　　　return this.name;
+    // 	　　　　　　};
+    // 	　　　　}
+    // 	　　};
+    // 　　alert(object.getNameFunc().call(object));
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>尖峰平谷</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/element-ui/1.4.6/theme-default/index.css">
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.js"></script>
+    <script src="https://cdn.bootcss.com/element-ui/1.4.6/index.js"></script>
+    <style type="text/css">
+    .tme {
+        width: 80%;
+    }
+
+    #timeline {
+        width: 100%;
+        height: 30px;
+        border-radius: 15px;
+        border: 1px solid #ccc;
+    }
+
+    ul,
+    li {
+        list-style: none;
+        width: 100%;
+    }
+
+    #timeline div {
+        float: left;
+        width: 25%;
+        height: 30px;
+        text-align: right;
+        line-height: 30px;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <form method="post">            
+            <div class="tme">
+                <div style="width: 300px;margin:0 auto;">
+                    <el-button type="default" @click="add">增加</el-button>
+                    <el-button type="primary" type="submit" @click="submitdata">保存</el-button>
+                </div>
+                <ul id="uls">
+                    <div id="timeline">
+                        <div>6:00</div>
+                        <div>12:00</div>
+                        <div>18:00</div>
+                        <div>24:00</div>
+                    </div>
+                    <li v-for="(i,index) in array">
+                        <el-slider v-model='i.a' :max=24 range show-stops :format-tooltip="formatTooltip" @change="updateData(index)">
+                        </el-slider>
+                        <el-select v-model="i.c" placeholder="请选择">
+                            <el-option v-for="item in i.b" :key="item.value" :label="item.label" :value="item.value">
+                            </el-option>
+                        </el-select>
+                        <el-button type="button" @click="remove(index)">删除</el-button>
+                    </li>
+                </ul>
+                <!-- <div>{{array}}</div> -->
+                <div>{{array2}}</div>
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript">
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                value: '',
+                value1: 0,
+                value2: 24,
+                value3: 0,
+                array: []
+            }
+        },
+        methods: {
+            updateData(index) {
+                this.value1 = [this.array[index].a[1], this.value2];
+                if (this.array.length > 1) {
+                    this.value3 = this.array[index - 1].a[1];
+                }
+                switch (true) {
+                    case this.array.length == 1 && this.array[index].a[0] > 0:
+                        this.array[index].a = [0, this.value2];
+                        break;
+                    case this.array.length > 1 && this.array[index].a[0] < this.value3:
+                        this.array[index].a = [this.value3, this.array[index].a[1]];
+                        break;
+                }
+            },
+            add() {
+                if (this.array.length == 0) {
+                    this.array.push({
+                        a: [0, 12],
+                        b: [{
+                                value: '1',
+                                label: '尖'
+                            },
+                            {
+                                value: '2',
+                                label: '高'
+                            },
+                            {
+                                value: '3',
+                                label: '平'
+                            },
+                            {
+                                value: '4',
+                                label: '谷'
+                            }
+                        ],
+                        c: ''
+                    })
+                } else {
+                    this.array.push({
+                        a: this.value1,
+                        b: [{
+                                value: '1',
+                                label: '尖'
+                            },
+                            {
+                                value: '2',
+                                label: '高'
+                            },
+                            {
+                                value: '3',
+                                label: '平'
+                            },
+                            {
+                                value: '4',
+                                label: '谷'
+                            }
+                        ],
+                        c: ''
+                    });
+                }
+            },
+            remove(index) {
+                this.array.splice(index, 1);
+            },
+            formatTooltip(val) {
+                var output = val-1 + "-" +val;
+                if(val==0){
+                    output=0;
+                }
+                return output;
+            },
+            submitdata(){
+                $.post(this.url,this.array2)
+            }
+        },
+        computed: {
+            array2: function() {
+                var obj = [];
+                obj = JSON.parse(JSON.stringify(this.array));
+                obj.forEach(function(ele) {
+                    delete ele.b
+                })
+                return obj;
+            }
+        }
+    })
+     var obj={a:1,b:2}
+     console.log(obj.a)
+    </script>
+</body>
+
+</html>

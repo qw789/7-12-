@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+	//一个对象的_proto_属性应该是对象构造器的原型对象
+		function Parent () {
+		  this.name = 'kevin';
+		}
+		 
+		Parent.prototype.getName = function () {
+		  console.log(this.name);
+		}
+		 
+		function Child () {
+		 Parent.call(this);
+		}
+		//只用单独的call不会把parent原型的方法继承下来
+		// Child.prototype = new Parent();
+		 
+		var child1 = new Child();
+		 
+		child1.getName()// kevin
+	</script>
+</body>
+</html>

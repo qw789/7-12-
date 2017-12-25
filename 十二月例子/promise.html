@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+    const getJSON = function(url) {
+        const promise = new Promise(function(resolve, reject) {
+            const handler = function() {
+                if (this.readyState !== 4) {
+                    return;
+                }
+                if (this.status === 200) {
+                    resolve(this.response);
+                } else {
+                    reject(new Error(this.statusText));
+                }
+            };
+            const client = new XMLHttpRequest();
+            client.open("GET", url);
+            client.onreadystatechange = handler;
+            client.responseType = "json";
+            client.setRequestHeader("Accept", "application/json");
+            client.send();
+
+        });
+
+        return promise;
+    };
+
+    getJSON("/posts.json").then(function(json) {
+        console.log('Contents: ' + json);
+    }, function(error) {
+        console.error('出错了', error);
+    });
+    function LateBloomer() {
+      this.petalCount = Math.ceil(Math.random() * 12) + 1;
+    }
+
+    // Declare bloom after a delay of 1 second
+    LateBloomer.prototype.bloom = function() {
+      window.setTimeout(this.declare.bind(this), 1000);
+    };
+
+    LateBloomer.prototype.declare = function() {
+      console.log('I am a beautiful flower with ' +
+        this.petalCount + ' petals!');
+    };
+
+    var flower = new LateBloomer();
+    flower.bloom();  // 一秒钟后, 调用'declare'方法
+    // setTimeout(function(){
+    //     var a=100;
+    //     console.log(a);
+    //     setTimeout(function () {
+    //         var b=200;
+    //         console.log(b)
+    //         setTimeout(function () {
+    //             var c=300;
+    //             console.log(c)
+    //         }, 1000);
+    //     }, 1000);
+    // },1000);  
+    new Promise(function (resolve, reject) {
+        setTimeout(function () {
+            var a=100;
+            resolve(a);
+        }, 1000);
+    }).then(function (res) {
+        console.log(res);
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                var b=200;
+                resolve(b);
+            }, 1000);
+        })
+    }).then(function (res) {
+        console.log(res);
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                var c=300
+                resolve(c);
+            }, 1000);
+        })
+    }).then(function (res) {
+            console.log(res);
+        }
+        )
+    </script>
+</body>
+
+</html>

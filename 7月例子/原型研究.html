@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	var MyComponent = function() {}
+	MyComponent.prototype.data = {
+	  a: 1,
+	  b: 2,
+	}
+		// 上面是一个虚拟的组件构造器，真实的组件构造器方法很多
+
+		var component1 = new MyComponent()
+		var component2 = new MyComponent()
+		// 上面实例化出来两个组件实例，也就是通过<my-component>调用，创建的两个实例
+		component1.data.b = 5
+		 // 5
+		 console.log(component2.data.b);
+	//vue.js data为什么不能是对象
+		var MyComponent = function() {
+		  this.data = this.data()
+		}
+		MyComponent.prototype.data = function() {
+		  return {
+		    a: 1,
+		    b: 2,
+		  }
+		}
+		var mycomponent1=new MyComponent();
+		var mycomponent2=new MyComponent();
+		mycomponent1.data.b=3;
+		console.log(mycomponent2.data.b)
+		console.log(mycomponent1.data.a === mycomponent2.data.a);
+	</script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>继承拖拽</title>
+	<style type="text/css">
+		#box{
+			width: 100px;
+			height: 100px;
+			background: #333;
+			position: absolute;
+			left: 0;
+			top: 0;
+			color: #fff;
+		}
+		#box11{
+			width: 100px;
+			height: 100px;
+			background: #333;
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			color: #fff;
+		}
+		#box2{
+			width: 100px;
+			height: 100px;
+			background: #FA0;
+			position: absolute;
+			right: 0;
+			top: 0;
+		}
+	</style>
+<!-- 	<aaa>
+	alert(1);
+	</aaa> -->
+	<script type="text/javascript">
+
+		function Mouse(id){
+			if (!id) return;
+			this.oBox = document.getElementById(id);
+			this.disX = 0;
+			this.disY = 0;
+			this.init();
+		}
+
+		Mouse.prototype.init = function(){
+			let _this = this;
+			this.oBox.onmousedown = function(ev){
+				_this.fnDown(ev);
+				return false;
+			}
+		}
+
+		Mouse.prototype.fnDown = function(ev){
+
+			let oEvent = ev || event;
+			this.disX = oEvent.clientX - this.oBox.offsetLeft;
+			this.disY = oEvent.clientY - this.oBox.offsetTop;
+			this.oNewBox = this.oBox.cloneNode(true);
+			this.oBox.parentNode.appendChild(this.oNewBox);
+			this.oNewBox.style.opacity = 0.3;
+			this.oNewBox.style.filter = 'alpha(opacity:30)';
+			this.oBox.setCapture && this.oBox.setCapture();
+			document.onmousemove = function(ev){
+				this.fnMove(ev);
+			}.bind(this);
+			document.onmouseup = function(){
+				this.fnUp();
+			}.bind(this);
+		}
+
+		Mouse.prototype.fnMove = function(ev){
+			let oEvent = ev || event;
+			let l = oEvent.clientX - this.disX;
+			let t = oEvent.clientY - this.disY;
+			let maxW = document.documentElement.clientWidth - this.oBox.offsetWidth;
+			let maxH = document.documentElement.clientHeight - this.oBox.offsetHeight;
+
+			// //限制范围
+			if (l<0) {l=0};
+			if (t<0) {t=0};
+			if (l>maxW) {l=maxW};
+			if (t>maxH) {t=maxH};
+
+			this.oNewBox.style.left = l +'px';
+			this.oNewBox.style.top = t + 'px';	
+			
+		}
+
+		Mouse.prototype.fnUp = function(){
+			
+			document.onmousemove = null;
+			document.onmouseup = null;
+			//释放捕获
+			this.oNewBox.releaseCapture && this.oNewBox.releaseCapture();
+			console.log(this.oNewBox.offsetLeft);
+			console.log(this)
+			this.oBox.style.left = this.oNewBox.offsetLeft +'px'
+			this.oBox.style.top = this.oNewBox.offsetTop +'px'
+			this.oBox.parentNode.removeChild(this.oNewBox);	
+			this.oBox.innerHTML = '111';
+		
+		}
+		//这就是经典的组合继承，原型链继承和构造函数继承。构造函数继承可以传参。
+		//这种优点是1.避免了引用类型的属性被所有实例共享2.可以在child给parent传参
+		function Mouse2(id){
+			Mouse.call(this,id)
+		}
+		//这句话的作用是什么呢？原型链继承。如果去掉这个,init会报错，为什么？
+		Mouse2.prototype = new Mouse();
+		Mouse2.prototype.constructor = Mouse2;
+		//继承后改写原型		
+		var any = Mouse.prototype.fnUp;
+		Mouse2.prototype.fnUp = function(){
+			//调用
+			any.call(this);
+			console.log(this.oBox.offsetLeft)
+			console.log(this)
+			document.onmousemove = null;
+			document.onmouseup = null;
+			// //释放捕获
+			this.oNewBox.releaseCapture && this.oNewBox.releaseCapture();
+			//这里this.oNewBox已经被删了，所以offsetleft为0
+			console.log(this.oNewBox.offsetLeft);
+			// //因为不是继承关系了所以要手动创建
+			this.oNewBox = this.oBox.cloneNode(true);
+			this.oBox.parentNode.appendChild(this.oNewBox);
+			this.oBox.style.opacity = 0.3;
+			this.oBox.style.filter = 'alpha(opacity:30)';
+
+			this.oBox.style.left = this.oNewBox.offsetLeft +'px'
+			this.oBox.style.top = this.oNewBox.offsetTop +'px'
+			this.oBox.parentNode.removeChild(this.oNewBox);
+		}
+
+		window.onload = function(){
+			new Mouse('box');
+			new Mouse('box11');
+			new Mouse2('box2');
+		}
+	</script>
+</head>
+<body>
+  <div id="box"></div>
+  <div id="box11"></div>
+  <div id="box2"></div>
+</body>
+</html>

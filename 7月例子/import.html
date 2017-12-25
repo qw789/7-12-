@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+// 	//es6
+// 	 var memoize = function(func){
+// 	  const cache = {};
+
+// 	  return (...args) => {
+// 	    const key = [...args].toString();
+
+// 	    return key in cache ? cache[key] : (cache[key] = func(...args));
+// 	  }
+// 	}
+// 	//es5
+// 	var memoize = function(func){
+//   var cache = {};
+
+//   return function(){
+//     var key = Array.prototype.slice.call(arguments).toString();
+   
+//     return key in cache ? cache[key] : (cache[key] =       func.apply(this,arguments));
+//   }
+// }
+
+// fibonacci = memoize(fibonacci);
+	// Array.prototype.slice.call(arguments)//能将具有length属性的对象转成数组
+	// var a={0:'first',1:'second',length:2};
+    // const b = [1,2,3];
+    // console.log(Object.getOwnPropertyDescriptor(b,'length'));
+ //    var o, d;
+
+	// o = { get foo() { return 17; } };
+	// d = Object.getOwnPropertyDescriptor(o, "foo");
+	// const arr = [];
+ //    arr[3]=4;
+ //            console.log(arr.length)
+ // function Shape() {
+ //                this.x = 0;
+ //                this.y = 0;
+ //            }
+ //            Shape.prototype.move = function (x,y) {
+ //                this.x += x;
+ //                this.y += y;
+ //                console.log('shape move');
+ //            }
+ //            function Rectangle() {
+ //                Shape.call(this);
+ //            }
+ //            Rectangle.prototype = Object.create(Shape.prototype);
+ //            Rectangle.prototype.constructor = Rectangle;
+ //            Rectangle.prototype.move = function (x,y) {
+ //                console.log('监听父类的move方法');
+ //                Shape.prototype.move.call(this,x,y);
+ //            }
+ //            const rect = new Rectangle();
+ //           console.log(rect.move(20,10)) 
+
+
+
+function OBArray() {
+                 const vue = Array.apply(null,arguments);
+                vue.__proto__ = OBArray.prototype;
+                vue.constructor = OBArray;
+                return vue;
+            }
+            // OBArray.prototype = Object.create(Array.prototype);
+            // OBArray.prototype.constructor = OBArray;
+            OBArray.prototype.push = function () {
+                const len = Array.prototype.push.apply(this,arguments);
+                console.log('push: ' + arguments[0] + ' 新的数组长度为:' + len);
+                return len;
+            }
+            OBArray.prototype.pop = function () {
+                const temp = Array.prototype.pop.call(this);
+                console.log('pop: ' + temp);
+                return temp;
+            }
+            OBArray.prototype.splice = function () {
+                console.log('采用了splice方法:');
+                return Array.prototype.splice.apply(this,arguments);
+            }
+
+            const vue = new OBArray(1,2,3,4,5);
+            var s=vue.push(10)
+            console.log(s)
+// 将arguments属性转换成Array的几种方法
+//             function f(){  
+//    console.log(arguments)
+//     var as1 = Array.prototype.slice.call(arguments,0);   
+//     var as2 = Array.apply(this, arguments);  
+//     var as3 = Array.apply(null, arguments);  
+//     var as4 = Array.prototype.splice.call(arguments,0,arguments.length);   
+//     console.log(as1);  
+//     console.log(as2);  
+//     console.log(as3);  
+//     console.log(as4);  
+// }  
+// f(1, 2, 3);  
+// f("a", "b");  
+// f(true);  
+	</script>
+</body>
+</html>

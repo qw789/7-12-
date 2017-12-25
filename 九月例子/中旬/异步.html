@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="demo">
+        <input v-model="text" />
+        <a @click="change()">change</a>
+    </div>
+    <script src="http://cdn.bootcss.com/vue/1.0.17/vue.min.js"></script>
+    <script>
+        'use strict';
+
+        var vm = new Vue({
+            el: '#demo',
+            data() {
+                return {
+                    text: '',
+                }
+            },
+            methods: {
+                change() {
+                    this.text = '123'
+                    this.text = '234'
+                    this.text = '345'
+                    this.$nextTick(function () {
+                        this.text = '456'
+                    })
+                }
+            },
+            watch: {
+                'text'(n, o) {
+                    console.log(n, o)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

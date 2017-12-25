@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div {
+				width: 10px;
+				height: 10px;
+				background: red;
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function() {
+				var str = '';
+				for(var i = 0; i < 50; i++) {
+					str += '<div></div>';
+				}
+				document.body.innerHTML = str;
+				var divs = document.querySelectorAll('div');
+				//	alert(divs);
+				document.onmousemove = function(e) {
+					/**
+					 * 
+					 * 
+					 * event   事件对象
+					 * 记录了在事件触发时的一些详细的信息
+					 * 一个事件发生的时候，这个事件可能是鼠标事件也可能是键盘事件，所以说，事件对象是不同的
+					 *    例如：
+					 *       鼠标位置，键盘位置，触发事件的元素等。
+					 * 
+					 * 事件对象是事件处理函数中的第一个参数
+					 * 
+					 * event有兼容性问题
+					 * event    chrome/ie
+					 * 参数                 FF
+					 * 
+					 * */
+					//	alert(8);
+					for(var i = divs.length - 1; i > 0; i--) {
+						divs[i].style.left = divs[i - 1].style.left;
+						divs[i].style.top = divs[i - 1].style.top;
+					}
+					divs[0].style.left = e.clientX + 'px';
+					divs[0].style.top = e.clientY + 'px';
+				}
+
+			};
+		</script>
+	</head>
+
+	<body>
+	</body>
+
+</html>

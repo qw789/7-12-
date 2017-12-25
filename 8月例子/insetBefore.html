@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	    <div id="parentElement">
+		  <span id="childElement">foo bar</span>
+		</div>
+	<script type="text/javascript">
+		
+		var sp1 = document.createElement("span");
+
+		// Get a reference to the element, before we want to insert the element
+		var sp2 = document.getElementById("childElement");
+		// Get a reference to the parent element
+		var parentDiv = sp2.parentNode;
+
+		// Insert the new element into the DOM before sp2
+		// parentDiv.insertBefore(sp1, sp2);
+		parentDiv.insertBefore(sp1, sp2.nextsiblings);
+	</script>
+</body>
+</html>

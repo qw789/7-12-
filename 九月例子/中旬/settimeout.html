@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="button" name="" value="aaaa">
+	<input type="" name="" id="input-box">
+	<script type="text/javascript">
+		var inputs = document.getElementsByTagName('input')[0];
+		console.log(inputs)
+		inputs.onclick = function A() {
+		  setTimeout(function B() {
+		    inputs.value +=' inputs';
+		  }, 0)
+		};
+
+		document.body.onclick = function C() {
+		  inputs.value += ' body'
+		};
+		//实验看效果即可，对比胰以下两者
+		document.getElementById('input-box').onkeypress = function(event) {
+		  this.value = this.value.toUpperCase();
+		}
+		document.getElementById('input-box').onkeypress = function(event) {
+		  var self = this;
+		  setTimeout(function() {
+		    self.value = self.value.toUpperCase();
+		  }, 0);
+		}
+	</script>
+</body>
+</html>

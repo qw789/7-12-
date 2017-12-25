@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<ul> 
+	    <li><a href="#/">turn white</a></li> 
+	    <li><a href="#/blue">turn blue</a></li> 
+	    <li><a href="#/green">turn green</a></li> 
+	</ul> 
+	<script type="text/javascript">
+		function Router() {
+		    this.routes = {};
+		    this.currentUrl = '';
+		}
+		Router.prototype.route = function(path, callback) {
+		    this.routes[path] = callback || function(){};
+		};
+		Router.prototype.refresh = function() {
+		    this.currentUrl = location.hash.slice(1) || '/';
+		    this.routes[this.currentUrl]();
+		};
+		Router.prototype.init = function() {
+		    window.addEventListener('load', this.refresh.bind(this), false);
+		    window.addEventListener('hashchange', this.refresh.bind(this), false);
+		}
+		window.Router = new Router();
+		window.Router.init();
+		var content = document.querySelector('body');
+		// change Page anything
+		function changeBgColor(color) {
+		    content.style.backgroundColor = color;
+		}
+		Router.route('/', function() {
+		    changeBgColor('white');
+		});
+		Router.route('/blue', function() {
+		    changeBgColor('blue');
+		});
+		Router.route('/green', function() {
+		    changeBgColor('green');
+		});
+		// 调用 history.pushState() 或者 history.replaceState() 不会触发 popstate 事件。popstate 事件只会在浏览器某些行为下触发, 比如点击后退按钮（或者在JavaScript中调用 history.back() 方法）。
+		// 这也就是说，我们在使用history API改变浏览器的url时，仍需要额外的步骤去触发 popstate 事件，例如调用 history.back() 会 history.forward() 等方法。
+	</script>
+</body>
+</html>

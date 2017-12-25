@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>模块模式</title>
+</head>
+<body>
+	<script type="text/javascript">
+		//匿名函数自执行
+		// (function(){
+		// 	var a=3;
+		// })()
+		//报错
+		// function(){
+
+		// }()
+		// var singletion=(function(){
+		// 	var b=4;
+		// 	return {
+		// 		c:1
+		// 	}
+		// })();
+		// // console.log(a)
+		// console.log(singletion.c)
+		// console.log(singletion.b)
+		(function(index){
+			if(index=1){
+				console.log(1)
+			}else{
+				console.log(2)
+			}
+		}(0))
+	</script>
+</body>
+</html>

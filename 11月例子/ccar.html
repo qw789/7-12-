@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var a = 'hello World';  
+		function bb(){  
+		 a = 'hello Bill';  
+		 console.log(a);    
+		}  
+		bb()      //'hello Bill'  
+		console.log(a);  //'hello Bill' 
+		var str = 'sssvvvvvvvvfpppfffffffpppff';
+		var arr = str.split('');
+		// var hourMap=[{'s':'尖峰'},{'p':'高峰'},{'v':'低谷'},{'f':'平段'}]
+		// var arr2=[];
+		// for(var i=0;i<arr.length;i++){
+		//    hourMap.forEach(function(index){
+		//             if(index[arr[i]]!=undefined){
+		//                 arr2.push(index[arr[i]])
+		//             }
+		//     })
+		// }		
+		var sindex=[],
+		    pindex=[],
+		    vindex=[],
+		    findex=[]
+		arr.forEach(function(ele,index){
+			switch(ele){
+				case "s":
+					sindex.push(index)
+					break;
+				case "p":
+					pindex.push(index)
+					break;
+				case "v":
+					vindex.push(index)
+					break;
+				case "f":
+					findex.push(index)
+					break;
+			}
+		})
+		console.log(pindex)
+	     var intevals = [];
+		function toHoursIntevals(arr) {
+			// 第一个
+			intevals.push({start:arr[0]})
+			for (var i = 0; i < arr.length; i++) {
+				// 不连续则新增一段
+				if (i && arr[i]!=arr[i-1]+1) {
+					intevals.slice(-1)[0].end = arr[i-1];
+					intevals.push({start:arr[i]})
+				}
+			}
+			// 最后一个
+			intevals.slice(-1)[0].end = arr[arr.length-1]; 
+			intevals.map(function(index){
+			        index.start=[index.start+":00-"+(index.end+1)+":00"];
+			        delete index.end
+			    })
+			return intevals;
+		}
+		console.log(toHoursIntevals(findex))
+
+	</script>
+</body>
+</html>

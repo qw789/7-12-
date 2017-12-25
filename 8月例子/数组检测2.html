@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// class FakeArray extends Array{
+		//   push(...args){
+		//       console.log('我被改变啦');
+		//       return super.push(...args);
+		//   }
+		// }
+
+		// var list = [1, 2, 3];
+
+		// var arr = new FakeArray(...list);
+
+		// console.log(arr.length)
+
+		// arr.push(3);
+
+		// console.log(arr)
+		function Father(){
+		}
+		Father.prototype.push = function(){
+		  console.log('我是父类方法')
+		}
+		// 下面的代码是博主你的代码，我只不过fix了一下call方法和最后构造函数调用的传参
+		// 同时由继承Array变成了继承Father
+		function FakeArray() {
+		    return Father.apply(this,arguments);
+		}
+
+		FakeArray.prototype = new Father;
+		FakeArray.prototype.constructor = FakeArray;
+		FakeArray.prototype.push = function () {
+		    console.log('我被改变啦');
+		    return Father.prototype.push.apply(this,arguments);
+		};
+		let fakeList = new FakeArray('a','b','c');
+		fakeList.push('f');
+	</script>
+</body>
+</html>

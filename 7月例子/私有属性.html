@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+    // var serialnum={
+    // 	$n:0,
+    // 	get next(){
+    // 		return this.$n++;
+    // 	},
+    // 	set next(n){
+    // 		if(n>=this.$n) this.$n=n;
+    // 		else throw "序列觉得"
+    // 	}
+    // }
+    // serialnum.next=-1;
+    // console.log(serialnum.next)
+    // var obj = {};
+
+    // Object.defineProperty(obj, 'age', {
+    // 	get: function(){
+    // 		return 20;
+    // 	},
+    // 	set: function(newVal){
+    // 		// console.log(newVal);
+    // 		this.newVal=newVal;
+    // 		// this.age += newVal;
+    // 	}
+    // })
+    // // console.log(obj.age)
+    // obj.age=3;
+    // console.log(obj.age)
+
+    // function AB(n){this.name=n;}; 
+    // var c= new AB("abcde");  
+    // console.log(c);
+    // Object.defineProperty(c, 'name', {
+    //     get: function() {
+    //         return name;
+    //     },
+    //     set: function(Name) {
+    //        this.name = Name;
+    //         }
+    // }); 
+    // c.name="xyz";  
+    // console.log(c.name); 
+
+    // function Ab(n){
+    //    this.age = n;
+    //  }
+    // Object.defineProperty(Ab.prototype, "name", {
+    //     get: function(){ return this._name },
+    //     set: function(value){ this._name = value }
+    // });
+    //这里的_name也是自己定的
+    class Ab {
+        constructor(n) {
+            this.name = n;
+        }
+        get name() { return this._name }
+        set name(value) { this._name = value }
+    }
+    var c = new Ab("abcde");
+    c.name = "ccc"
+    console.log(c, c.name);
+    </script>
+</body>
+
+</html>

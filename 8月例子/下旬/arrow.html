@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+
+     // 1.
+	function foo(id) {
+			// var _this=this;
+		      this.id=id
+		  setTimeout(function(){
+		  	console.log('id:', this.id);
+		  }.bind(this), 100);
+		}
+
+		var id = 21;
+		foo(42);
+	// 2.
+	// function foo() {			
+	// 	  setTimeout(function(){
+	// 	  	console.log('id:', this.id);
+	// 	  }.bind(this), 100);
+	// 	}
+
+	// 	var id = 21;
+	// 	foo.call({ id: 42 });
+	</script>
+</body>
+</html>

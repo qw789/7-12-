@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container-fluid" id="app">
+        <button type="button" class="btn" @click="add">add</button>
+        <ul>
+            <li v-for="item in items">
+                <c1 :item="item"></c1>
+                <button type="button" class="btn btn-danger btn-xs" @click="remove(item)">remove</button>
+            </li>
+        </ul>
+        <div>{{ items }}</div>
+    </div>
+
+    <template id="c1">
+        <input type="text" v-model="item.value" />
+    </template>
+
+    <script src="http://cdn.bootcss.com/vue/2.0.3/vue.min.js"></script>
+</body>
+</html>
+<script>
+
+    Vue.component('c1', {
+        props: ['item'],
+        template: '#c1'
+    })
+
+    var vm = new Vue({
+        el: '#app',
+        data() {
+            return {
+                items: []
+            }
+        },
+        methods: {
+            add() {
+                this.items.push({
+                    value: null
+                })
+            },
+            remove(item) {
+                var i = this.items.indexOf(item)
+                this.items.splice(i, 1)
+            }
+        }
+    })
+</script>

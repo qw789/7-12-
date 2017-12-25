@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery UI 滑块（Slider） - 默认功能</title>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
+  <script>
+ $(function() {
+    $( "#slider-range" ).slider({
+      range: true,
+      min: 0,
+      max: 96,
+      values: [ 0, 96 ],
+      slide: function( event, ui ) {
+        $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+      }
+    });
+    $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
+      " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+
+    $( "#slider-range2" ).slider({
+      range: true,
+      min: 0,
+      max: 96,
+      values: [ 0, 96 ],
+      slide: function( event, ui ) {
+        $( "#amount2" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+      }
+    });
+    $( "#amount2" ).val( "$" + $( "#slider-range2" ).slider( "values", 0 ) +
+      " - $" + $( "#slider-range2" ).slider( "values", 1 ) );
+  });
+  </script>
+</head>
+<body>
+ <p>
+   <label for="amount">高峰时间：</label>
+   <input type="text" id="amount" style="border:0; color:#f6931f; font-weight:bold;">
+ </p>
+  
+ <div id="slider-range"></div>
+
+ <p>
+   <label for="amount2">尖峰时间：</label>
+   <input type="text" id="amount2" style="border:0; color:#f6931f; font-weight:bold;">
+ </p>
+  
+ <div id="slider-range2"></div>
+ <input type="range" multiple name="">
+</body>
+</html>

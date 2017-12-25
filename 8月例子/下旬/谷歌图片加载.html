@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+    	li{
+    		width: 300px;
+    		height: 300px;
+    	}
+    	li img{
+    		overflow: hidden;
+    		width: 100%;
+    	}
+    </style>
+    <script src="https://unpkg.com/vue@2.3.3/dist/vue.js"></script>
+</head>
+
+<body>
+    <ul id="app">
+    	<li v-img="val.url" v-for="val in list"></li>
+    </ul>
+    <script type="text/javascript">
+    //new Image()是为了图片预加载，相当于给浏览器缓存了一张图片
+    Vue.directive("img", {
+        inserted: function(el, binding) {
+            var color = Math.floor(Math.random() * 1000000);
+            el.style.backgroundColor = "#" + color;
+            var img = new Image();
+            img.src = binding.value;
+            img.onload = function() {
+            	// el.appendChild(img);
+                el.style.backgroundImage = `url(${binding.value})`;
+            }
+        }
+    })
+    new Vue({
+        el: '#app',
+        data:{
+        	list: [
+	        	{
+	        	url: "https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=25945585,2617447389&fm=173&s=AED215CBDC83BE535A35093F0300C0C2&w=600&h=317&img.JPEG"
+	        	 },
+				{
+	        	url: "https://pic3.zhimg.com/v2-7ebc43c34d7bff842d25c7c8f5e76caa_b.png"
+	        	 },
+	        	 {
+	        	url: "https://pic4.zhimg.com/v2-23be15fb1ba2c618f697e504c0c01a9b_b.png"
+	        	 }
+
+             ]
+        }
+        
+    })
+    </script>
+</body>
+
+</html>

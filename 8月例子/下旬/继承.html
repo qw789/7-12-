@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>继承</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// function Father(){
+		// }
+		// Father.prototype.push = function(){
+		//   console.log('我是父类方法')
+		// }
+		// // 下面的代码是博主你的代码，我只不过fix了一下call方法和最后构造函数调用的传参
+		// // 同时由继承Array变成了继承Father
+		// function FakeArray() {
+		//      Father.apply(this,arguments);
+		// }
+
+		// FakeArray.prototype = new Father;
+		// FakeArray.prototype.constructor = FakeArray;
+		// FakeArray.prototype.push = function () {
+		//     console.log('我被改变啦');
+		//     console.log(arguments)
+		//     return Father.prototype.push.apply(this,arguments);
+		// };
+		// let fakeList = new FakeArray('a','b','c');
+		// fakeList.push("d");
+
+		function fakeArray(){
+	        let a = Array.apply(null,arguments)
+	        // let a = new Array();
+	        console.log(a.__proto__.constructor==a.constructor)
+	        a.__proto__ = fakeArray.prototype
+	        // a.constructor = fakeArray
+	        // console.log(a)
+	        // console.log(a.__proto__.__proto__==Array.prototype);
+	         return a
+	         //这里返回一个真正的数组,a拥有数组所有方法。不过需要往上找两级。重写数组的方法只需要再原型上改写就行，等于是网上找一级。
+          }
+         
+    original = Array.prototype
+    fakeArray.prototype = Object.create(original);
+    fakeArray.prototype.constructor = fakeArray 
+    fakeArray.prototype.push = function(){
+        console.log('苟利国家生死已')
+        original.push.apply(this,arguments)
+    }
+    var words = fakeArray()
+    words.push('岂','因','祸','福','避','趋','之')
+    console.log(words.join(""))
+    console.log(words.__proto__.__proto__.constructor==Array)
+	</script>
+</body>
+</html>

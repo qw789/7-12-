@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jsonp</title>
+</head>
+<body>
+	<div>jsonp</div>
+	<script type="text/javascript">
+		function getremotedata(data){
+			console.log(data)
+		}
+		var div=document.getElementsByTagName("div");
+		div[0].onclick=function(){
+			var url="localhost:80/search.php?callback=getremotedata";
+			// var url="getdata.js";
+			var script=document.createElement("script");
+			script.setAttribute("src",url);
+			document.getElementsByTagName("head")[0].appendChild(script);
+		}
+	</script>
+</body>
+</html>

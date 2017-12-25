@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function Cat(){
+		//				this.age=11;
+					}
+					Cat.prototype.age=11
+						
+					
+					Cat.prototype.say=function(){
+						console.log(this.age);
+						this.age++;
+						console.log(this.age)
+					}
+					var cat=new Cat();
+					var cat2=new Cat();
+				    cat.say();
+				    cat2.say();
+
+	</script>
+</body>
+</html>
