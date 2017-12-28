@@ -6,17 +6,41 @@
 	<script src="https://unpkg.com/vue/dist/vue.js"></script>
 </head>
 <body>
-	<div id="app">
-		<input type="" name="" v-bind:value="something" v-on:input="something = $event.target.value">
-		{{something}}
+	<div id="demo">
+	  <app-layout>
+	    <h1 slot="header">这里可能是一个页面标题</h1>
+
+	    <p>主要内容的一个段落。</p>
+	    <p>另一个主要段落。</p>
+
+	    <p slot="footer">这里有一些联系信息</p>
+	  </app-layout>
 	</div>
 	<script type="text/javascript">
+		Vue.component('app-layout', {
+  // 就像 data 一样，prop 也可以在模板中使用
+  // 同样也可以在 vm 实例中通过 this.message 来使用
+	  template: `<div class="container">
+				  <header>
+				    <slot name="header"></slot>
+				  </header>
+				  <main>
+				    <slot>
+				    AAAAAAA
+				    </slot>
+				  </main>
+				  <footer>
+				    <slot name="footer"></slot>
+				  </footer>
+				</div>`,
+			});
 		var app=new Vue({
-			 el: '#app',
+			 el: '#demo',
 			 data: {
    				something:"ddd"
   			}
 		})
+		console.log(app.$slots.header)
 	</script>
 </body>
 </html>

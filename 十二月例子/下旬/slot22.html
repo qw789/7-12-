@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+	<script type="text/x-template" id="anchored-heading-template">
+	  <h1 v-if="level === 1">
+	    <slot>
+	    	h1
+	    </slot>
+	  </h1>
+	  <h2 v-else-if="level === 2">
+	    <slot>
+	    	h2
+	    </slot>
+	  </h2>
+	  <h3 v-else-if="level === 3">
+	    <slot>
+	    	h3
+	    </slot>
+	  </h3>
+	  <h4 v-else-if="level === 4">
+	    <slot></slot>
+	  </h4>
+	  <h5 v-else-if="level === 5">
+	    <slot></slot>
+	  </h5>
+	  <h6 v-else-if="level === 6">
+	    <slot></slot>
+	  </h6>
+	</script>
+	<div id="demo">
+	 <anchored-heading v-bind:level="3">
+	 </anchored-heading>
+	 <anchored-heading v-bind:level="1">
+	 </anchored-heading>
+	</div>
+	<script type="text/javascript">
+		Vue.component('anchored-heading', {
+		  template: '#anchored-heading-template',
+		  props: {
+		    level: {
+		      type: Number,
+		      required: true
+		    }
+		  }
+		})
+		var app=new Vue({
+			 el: '#demo',
+			 data: {
+   				something:"ddd"
+  			}
+		})
+	</script>
+</body>
+</html>

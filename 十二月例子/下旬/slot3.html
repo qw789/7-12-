@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="demo">
+	 <!-- <anchored-heading :level="1">Hello world!</anchored-heading> -->
+	 <anchored-heading v-bind:level="2">
+	 	<slot>
+	 		sss
+	 	</slot>
+	 </anchored-heading>
+	</div>
+	<script type="text/javascript">
+		Vue.component('anchored-heading', {
+		  render: function (h) {
+		    return h(
+		      'div',// tag name 标签名称
+		      {
+		      	props:{
+		      		level:1
+		      	}
+		      },
+		      [
+	        h('span', 'Hello'),
+		    ' world!'
+		      ]
+		    )
+		  }
+		})
+		var app=new Vue({
+			 el: '#demo',
+			 data: {
+   				something:"ddd"
+  			}
+		})
+	</script>
+</body>
+</html>

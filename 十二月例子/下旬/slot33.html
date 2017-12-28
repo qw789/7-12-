@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+ <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">  
+  <link href="http://apps.bdimg.com/libs/animate.css/3.1.0/animate.min.css" type="text/css" rel="stylesheet" media="all">
+	
+</head>
+<body>
+    <div id="special" class="special">
+		<div class="container">
+			<h3 class="title">技术栈</h3>
+			<my-special v-bind:item="special"></my-special>
+		</div>
+	</div>
+ <script src="https://unpkg.com/vue/dist/vue.js"></script>
+ <script type="text/javascript">
+ 	function progressBar(createElement,degree){
+ 		return createElement('div',{
+ 			attrs:{
+ 				'class': 'progress-bar',
+ 				'role': 'progressbar',
+ 				'aria-valuenow': degree,
+ 				'aria-valuemin': 0,
+ 				'aria-valuemax': 100,
+ 				
+ 			},
+ 			style: {
+ 				'width': degree + "%"
+ 			}
+ 		},degree)
+ 	}
+
+ 	function progress(createElement,degree){
+ 		return createElement('div',{
+ 			'class': 'progress'
+ 		},[
+ 			progressBar(createElement,degree)
+ 		])
+ 	}
+
+ 	function title(createElement,title){
+ 		return createElement('h6',title)
+ 	}
+
+ 	function description(createElement,degree) {
+ 		return createElement('p',degree)
+ 	}
+
+ 	function leftall(createElement,txt,degree) {
+ 		return createElement('div',
+ 			[
+ 				title(createElement,txt),
+ 				progress(createElement,degree)
+ 			])
+ 	}
+
+ 	function leftBox(createElement,item) {
+ 		return createElement('div',{
+ 			attrs: {
+ 					'class': "col-md-4 special-grids "
+ 					
+ 				},
+ 				style: {
+ 					'visibility': 'visible',
+ 					'webkit-animation-delay': '.5s'
+ 				}
+ 			},
+ 			item.map(function(data) {
+ 				return leftall(createElement,data.title,data.degree)
+ 			})
+ 		)
+ 	}
+
+ 	function rightBox(createElement,item) {
+ 		return createElement('div',{
+ 			attrs: {
+ 				'class': 'col-md-8 special-grids describe wow fadeInRight animated',
+ 				'data-wow-delay': '.5s',
+ 			},
+ 			style: {
+ 					'visibility': 'visible',
+ 					'webkit-animation-delay': '.5s'
+ 				}
+ 			},
+ 			item.map(function(data) {
+ 				return description(createElement,data.description)
+ 			})
+ 		)
+ 	}
+
+ 	Vue.component('my-special',{
+ 		render: function(createElement) {
+ 			console.log(this.item)
+ 			return createElement('div',
+ 				[leftBox(createElement,this.item),
+ 				rightBox(createElement,this.item)]
+ 			)
+ 		},
+ 		props: ['item']
+ 	})
+
+ 	// Vue.component('my-id',{
+ 	// 	template: '<p>{{item instanceof Array}}</p>',
+ 	// 	props: ['item']	
+ 	// })
+
+
+
+
+
+ 	var special = new Vue({
+ 		el: "#special",
+ 		data: {
+ 			special: [
+ 				{
+ 					"title": "HTML&CSS",
+ 					"degree": 80,
+ 					"description": "熟悉W3C标准，能写出兼容各大主流浏览器的友好页面"
+ 				},
+ 				{
+ 					"title": "JavaScript、jQuery",
+ 					"degree": 60,
+ 					"description": "熟悉原生JavaScrtp、jQuery、Ajax操作。能运用模块化、面向对象方式编程"
+ 				},
+ 				
+ 				{
+ 					"title": "Java、JSP",
+ 					"degree": 20,
+ 					"description": "了解Java编程，JSP各种基本指令，能和后台人员很好沟通"
+ 				},
+ 				{
+ 					"title": "GIT、SVN",
+ 					"degree": 40,
+ 					"description": "有运用GIT、SVN版本管理工具经验"
+ 				}
+ 			]
+ 		}
+ 	})
+ </script>
+</body>
+</html>
